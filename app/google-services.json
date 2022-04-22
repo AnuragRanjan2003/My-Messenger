@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "280731726969",
+    "project_id": "my-messenger-dccf7",
+    "storage_bucket": "my-messenger-dccf7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280731726969:android:86fe68bbcbd10e188dd0a8",
+        "android_client_info": {
+          "package_name": "com.example.mymessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280731726969-84ulpgkuehfr22edkdk03r8nlo89tl10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBadrPf-NZHAvKHorobv2UpIp5IbP-Drew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280731726969-84ulpgkuehfr22edkdk03r8nlo89tl10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

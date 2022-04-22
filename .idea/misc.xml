@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/drawable/filled_button.xml" value="0.17" />
+        <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/drawable/google_button.xml" value="0.17" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/drawable/text_field.xml" value="0.17" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/drawable/uncoloured_button.xml" value="0.17" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout-land/activity_main.xml" value="0.44414414414414416" />
+        <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_forgot_password.xml" value="0.25677083333333334" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_main.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_main2.xml" value="0.25677083333333334" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_sign_up.xml" value="0.25677083333333334" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_splash.xml" value="0.25677083333333334" />
