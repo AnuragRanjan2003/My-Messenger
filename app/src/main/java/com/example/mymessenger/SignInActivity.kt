@@ -37,6 +37,7 @@ class SignInActivity : AppCompatActivity() {
                     binding.etSignInPassword.setError("Password is required")
                     progressdig.dismiss()
                     return@setOnClickListener
+
                 } else {
                     auth.signInWithEmailAndPassword(
                         binding.etSignInEmail.text.toString(),
