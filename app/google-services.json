@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "280731726969",
+    "firebase_url": "https://my-messenger-dccf7-default-rtdb.firebaseio.com",
     "project_id": "my-messenger-dccf7",
     "storage_bucket": "my-messenger-dccf7.appspot.com"
   },
