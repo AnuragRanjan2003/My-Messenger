@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.mymessenger.R.id.homeFragment
 import com.example.mymessenger.databinding.ActivityMain2Binding
 import com.example.mymessenger.template.userVerification
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,7 +39,7 @@ class MainActivity2 : AppCompatActivity() {
 
 
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when (it) {
+            when (it.itemId) {
                 R.id.homeFragment -> replace(homeFragment)
                 R.id.mainFragment -> replace(mainFragment)
                 R.id.settingFragment -> replace(settingFragment)

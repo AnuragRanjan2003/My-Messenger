@@ -34,6 +34,8 @@ class SignUpActivity : AppCompatActivity() {
             val a = binding.etSignUpInEmail.text.toString()
             val b = binding.etSignUpPassword.text.toString()
             val c = binding.etUserName.text.toString()
+            val place=binding.etSignUpPlace.text.toString()
+            val job=binding.etSignUpJob.text.toString()
             if (a.isEmpty()) {
                 binding.etSignUpInEmail.setError("Email is Required")
                 progressDialog.dismiss()
@@ -62,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
                             complete.setIntent(intent)
                             complete.runComp()
                             finishAffinity()
-                            val user = UserModel(c, task.result.user?.uid.toString())
+                            val user = UserModel(c, task.result.user?.uid.toString(),place, job)
                             database.getReference("users").child(task.result.user?.uid.toString())
                                 .setValue(user)
                         }

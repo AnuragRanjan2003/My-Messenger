@@ -12,7 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyMessenger">
         <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".AskActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignInActivity"
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
@@ -26,8 +35,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-        <activity android:name=".MainActivity2"
-            android:exported="true"/>
+        <activity
+            android:name=".MainActivity2"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
