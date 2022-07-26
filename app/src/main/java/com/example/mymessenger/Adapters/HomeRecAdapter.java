@@ -16,12 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mymessenger.ChatActivity;
 import com.example.mymessenger.Models.UserModel;
 import com.example.mymessenger.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHolder> {
     ArrayList<UserModel> arrayList;
     Context context;
+    FirebaseDatabase database;
+
 
     public HomeRecAdapter(ArrayList<UserModel> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -41,6 +47,7 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
         holder.name.setText(user.getUsername());
         holder.place.setText(user.getPlace());
         holder.job.setText(user.getJob());
+
     }
 
     @Override
@@ -62,11 +69,15 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(context, ChatActivity.class));
+                    Intent intent=new Intent(context, ChatActivity.class);
+
+                    intent.putExtra("recName",name.getText().toString());
+                    context.startActivity(intent);
                 }
             });
         }
     }
+
 
 
 }

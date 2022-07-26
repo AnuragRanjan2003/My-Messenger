@@ -1,10 +1,13 @@
 package com.example.mymessenger
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +29,7 @@ class SettingFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -35,6 +39,20 @@ class SettingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_setting, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var mAuth = FirebaseAuth.getInstance()
+        var fUser = mAuth.currentUser
+        var logOut = view.findViewById<Button>(R.id.btn_logOut)
+        logOut.setOnClickListener(View.OnClickListener {
+            mAuth.signOut()
+            var intent = Intent(context, AskActivity::class.java)
+            startActivity(intent)
+
+
+        })
     }
 
     companion object {
