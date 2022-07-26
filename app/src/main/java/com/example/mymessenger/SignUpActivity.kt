@@ -46,8 +46,8 @@ class SignUpActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                     return@setOnClickListener
                 } else {
-                    if (b.isEmpty()) {
-                        binding.etSignUpPassword.setError("Password is required")
+                    if (b.isEmpty()|| b.length<6) {
+                        binding.etSignUpPassword.setError("Password too short")
                         progressDialog.dismiss()
                         return@setOnClickListener
                     } else {
