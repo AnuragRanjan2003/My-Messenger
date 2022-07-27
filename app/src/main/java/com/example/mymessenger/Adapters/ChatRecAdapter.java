@@ -41,61 +41,66 @@ public class ChatRecAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        switch (viewType){
-            case Layout_One:{
-                View layout1= LayoutInflater.from(context).inflate(R.layout.my_chat_vm,parent,false);
+        switch (viewType) {
+            case Layout_One: {
+                View layout1 = LayoutInflater.from(context).inflate(R.layout.my_chat_vm, parent, false);
                 return new MyChatViewHolder(layout1);
             }
-            case Layout_Two:{
-                View layout2= LayoutInflater.from(context).inflate(R.layout.chat_vm_2,parent,false);
+            case Layout_Two: {
+                View layout2 = LayoutInflater.from(context).inflate(R.layout.chat_vm_2, parent, false);
                 return new SenderChatViewHolder(layout2);
             }
             default:
-                View layout1= LayoutInflater.from(context).inflate(R.layout.my_chat_vm,parent,false);
+                View layout1 = LayoutInflater.from(context).inflate(R.layout.my_chat_vm, parent, false);
                 return new MyChatViewHolder(layout1);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            switch (chatList.get(position).getViewType()){
-                case Layout_One:
-                    String s=chatList.get(position).getText();
-                    ((MyChatViewHolder) holder).setView(s);
-                    break;
-                case Layout_Two:
-                    String  s1=chatList.get(position).getText();
-                    String n=chatList.get(position).getSenderName();
-                    ((SenderChatViewHolder) holder).setView(n,s1);
-                    break;
-            }
+        switch (chatList.get(position).getViewType()) {
+            case Layout_One:
+                String s = chatList.get(position).getText();
+                ((MyChatViewHolder) holder).setView(s);
+                break;
+            case Layout_Two:
+                String s1 = chatList.get(position).getText();
+                String n = chatList.get(position).getSenderName();
+                ((SenderChatViewHolder) holder).setView(n, s1);
+                break;
+        }
     }
 
     @Override
     public int getItemCount() {
         return chatList.size();
     }
-    class MyChatViewHolder extends RecyclerView.ViewHolder{
-        TextView You,MyMessage;
+
+    class MyChatViewHolder extends RecyclerView.ViewHolder {
+        TextView You, MyMessage;
+
         public MyChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            You=itemView.findViewById(R.id.chat_rec_you);
-            MyMessage=itemView.findViewById(R.id.chat_rec_mymsg);
+            You = itemView.findViewById(R.id.chat_rec_you);
+            MyMessage = itemView.findViewById(R.id.chat_rec_mymsg);
         }
-        private void setView(String text){
+
+        private void setView(String text) {
             You.setText(R.string.You);
             MyMessage.setText(text);
         }
     }
-    class SenderChatViewHolder extends RecyclerView.ViewHolder{
-        TextView senderName,Message;
+
+    class SenderChatViewHolder extends RecyclerView.ViewHolder {
+        TextView senderName, Message;
+
         public SenderChatViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            senderName=itemView.findViewById(R.id.chat_rec_Name);
-            Message=itemView.findViewById(R.id.chat_rec_msg);
+            senderName = itemView.findViewById(R.id.chat_rec_Name);
+            Message = itemView.findViewById(R.id.chat_rec_msg);
         }
-        private void setView(String sender,String text){
+
+        private void setView(String sender, String text) {
             senderName.setText(sender);
             Message.setText(text);
         }

@@ -4,68 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
     tools:context=".ChatActivity"
-    android:backgroundTint="@color/grey">
+    tools:layout_editor_absoluteY="81dp">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_rec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@color/black"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/grey"/>
+        app:layout_constraintVertical_bias="0.466"
+        tools:listitem="@layout/chat_vm_2" />
+
+    <ProgressBar
+        android:id="@+id/chat_pBar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@id/chat_pBar"
+        android:indeterminateTint="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_rec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chat_rec" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/chat_bar"
+        android:elevation="10dp"
         android:gravity="center_horizontal"
-
         android:orientation="horizontal"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+        <EditText
+            android:id="@+id/et_Chat"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:minWidth="200dp"
-            android:layout_marginBottom="5dp"
-
-            app:endIconMode="clear_text"
-            android:layout_marginEnd="20dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:autofillHints=""
+            android:hint="Chat"
+            android:minWidth="230dp"
+            android:minHeight="48dp"
+            android:textSize="18sp"
+            app:endIconMode="clear_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_Chat"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="chat" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_send"
             android:layout_width="60dp"
-            android:layout_height="70dp"
+            android:layout_height="55dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="30dp"
-            android:backgroundTint="#00897B"
-            app:icon="@drawable/ic_baseline_send_24"
-            app:iconTint="@color/white"
+            android:backgroundTint="@color/white"
+            app:drawableStartCompat="@drawable/ic_baseline_send_24"
+            app:drawableTint="@color/purple_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textInputLayout"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="729dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

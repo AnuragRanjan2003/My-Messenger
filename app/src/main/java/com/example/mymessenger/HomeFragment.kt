@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,8 +38,10 @@ class HomeFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var recAdapter: HomeRecAdapter
-    private lateinit var pd:ProgressDialog
-     var s:String="a"
+    private lateinit var pd: ProgressDialog
+    private lateinit var pb: ProgressBar
+    var s: String = "a"
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -67,46 +70,42 @@ class HomeFragment : Fragment() {
         database = FirebaseDatabase.getInstance()
         mAuth = FirebaseAuth.getInstance()
         firebaseUser = mAuth.currentUser!!
-        pd=ProgressDialog(context)
-        pd.setTitle("Please Wait")
-        pd.setMessage("Fetching Data")
-        pd.show()
+        pb = view.findViewById(R.id.HFrag_pBar)
+        pb.visibility = 1;
         recyclerView = view.findViewById(R.id.home_rec)
         recyclerView.hasFixedSize()
         recyclerView.layoutManager = LinearLayoutManager(context)
         val list = ArrayList<UserModel>()
-        database.getReference("users").child(firebaseUser.uid).child("username").get().addOnCompleteListener {
-            s = it.result.value.toString()
+        database.getReference("users").child(firebaseUser.uid).child("username").get()
+            .addOnCompleteListener {
+                s = it.result.value.toString()
 
-            database.getReference("users").addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (snap in snapshot.children) {
-                        val user = snap.getValue(UserModel::class.java)
-                        if (user != null) {
-                            if (!user.username.equals(s)) {
-                                list.add(user!!)
+                database.getReference("users").addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (snap in snapshot.children) {
+                            val user = snap.getValue(UserModel::class.java)
+                            if (user != null) {
+                                if (!user.username.equals(s)) {
+                                    list.add(user!!)
+                                }
                             }
                         }
-                    }
-                    pd.dismiss()
-                    recAdapter.notifyDataSetChanged()
-                }
 
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(context, error.message, 500).show()
-                }
-            })
-        }
+                        pb.visibility = -1;
+                        recAdapter.notifyDataSetChanged()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(context, error.message, 500).show()
+                    }
+                })
+            }
 
         recAdapter = HomeRecAdapter(list, context)
         recyclerView.adapter = recAdapter
 
 
     }
-
-
-
-
 
 
     companion object {

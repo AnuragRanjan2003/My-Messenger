@@ -1,7 +1,7 @@
 package com.example.mymessenger.Models;
 
 public class ChatModel {
-    String senderName, receiverName, Text,Date,Time;
+    String senderName, receiverName, Text, Date, Time,Uid;
     int ViewType;
     public static final int Layout_One = 1;
     public static final int Layout_Two = 2;
@@ -14,12 +14,12 @@ public class ChatModel {
         ViewType = viewType;
     }
 
-    public ChatModel(String senderName, String receiverName, String Text,String Date,String Time) {
+    public ChatModel(String senderName, String receiverName, String Text, String Date, String Time) {
         this.receiverName = receiverName;
         this.senderName = senderName;
         this.Text = Text;
-        this.Date=Date;
-        this.Time=Time;
+        this.Date = Date;
+        this.Time = Time;
     }
 
     public ChatModel() {
@@ -63,5 +63,11 @@ public class ChatModel {
 
     public void setTime(String time) {
         Time = time;
+    }
+    public void setUid(String Uid){
+        this.Uid=Uid;
+    }
+    public String getUid(){
+        return Uid;
     }
 }

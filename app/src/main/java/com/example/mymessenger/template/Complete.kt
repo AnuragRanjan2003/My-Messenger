@@ -19,6 +19,8 @@ class Complete(
     private lateinit var fMsg: String
     private lateinit var intent: Intent
 
+
+
     fun setMsg(sMsg: String, fMsg: String) {
         this.sMsg = sMsg
         this.fMsg = fMsg

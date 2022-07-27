@@ -41,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
     ArrayList<ChatModel> cArray = new ArrayList<>();
     ChatRecAdapter cAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
@@ -56,33 +57,36 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                database.getReference("users").child(fUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                    @Override
-                    public void onSuccess(DataSnapshot dataSnapshot) {
-                        uModel = dataSnapshot.getValue(UserModel.class);
-                        assert uModel != null;
+                if (!binding.etChat.getText().toString().isEmpty()) {
+                    database.getReference("users").child(fUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            uModel = dataSnapshot.getValue(UserModel.class);
+                            assert uModel != null;
 
-                        database.getReference("users").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                            @Override
-                            public void onSuccess(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                                    UserModel user = snap.getValue(UserModel.class);
-                                    if (user.getUsername().equals(getRecName())) {
-                                        Date date = Calendar.getInstance().getTime();
-                                        String d = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-                                        String t = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().getTime());
-                                        ChatModel cModel = new ChatModel(uModel.getUsername(), getRecName(), binding.etChat.getText().toString(), d, t);
-                                        cModel.setViewType(1);
-                                        UidCat uCat = new UidCat(uModel.getUid(), user.getUid());
-                                        database.getReference("chats").child(uCat.createUid()).child(date.toString()).setValue(cModel);
-                                        break;
+                            database.getReference("users").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                @Override
+                                public void onSuccess(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                                        UserModel user = snap.getValue(UserModel.class);
+                                        if (user.getUsername().equals(getRecName())) {
+                                            Date date = Calendar.getInstance().getTime();
+                                            String d = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                                            String t = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().getTime());
+                                            ChatModel cModel = new ChatModel(uModel.getUsername(), getRecName(), binding.etChat.getText().toString(), d, t);
+                                            UidCat uCat = new UidCat(uModel.getUid(), user.getUid());
+                                            database.getReference("chats").child(uCat.createUid()).child(date.toString()).setValue(cModel);
+                                            binding.etChat.setText("");
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
 
-                    }
-                });
+                        }
+                    });
+                }
+
 
             }
         });
@@ -99,10 +103,16 @@ public class ChatActivity extends AppCompatActivity {
                         database.getReference("chats").child(uCat.createUid()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                cArray.clear();
                                 for (DataSnapshot snap : snapshot.getChildren()) {
                                     ChatModel cModel = snap.getValue(ChatModel.class);
+                                    if(getRecName().equals(cModel.getReceiverName()))
+                                        cModel.setViewType(1);
+                                    else
+                                        cModel.setViewType(2);
                                     cArray.add(cModel);
                                 }
+                                binding.chatPBar.setVisibility(View.GONE);
                                 cAdapter.notifyDataSetChanged();
 
                             }
@@ -117,6 +127,7 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
         cAdapter = new ChatRecAdapter(cArray, ChatActivity.this);
         binding.chatRec.setAdapter(cAdapter);
     }
