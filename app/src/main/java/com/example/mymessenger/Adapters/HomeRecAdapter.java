@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mymessenger.ChatActivity;
 import com.example.mymessenger.Models.UserModel;
 import com.example.mymessenger.R;
@@ -27,6 +28,7 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
     ArrayList<UserModel> arrayList;
     Context context;
     FirebaseDatabase database;
+
 
 
     public HomeRecAdapter(ArrayList<UserModel> arrayList, Context context) {
@@ -47,7 +49,10 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
         holder.name.setText(user.getUsername());
         holder.place.setText(user.getPlace());
         holder.job.setText(user.getJob());
-
+        if(!user.getUrl().equals(""))
+            Glide.with(holder.itemView.getContext()).load(user.getUrl()).into(holder.Image);
+        else
+            Glide.with(holder.itemView.getContext()).load(R.drawable.man).into(holder.Image);
     }
 
     @Override
@@ -70,11 +75,11 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(context, ChatActivity.class);
-
                     intent.putExtra("recName",name.getText().toString());
                     context.startActivity(intent);
                 }
             });
+
         }
     }
 

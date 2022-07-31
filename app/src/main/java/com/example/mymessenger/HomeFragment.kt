@@ -1,20 +1,19 @@
 package com.example.mymessenger
 
-import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.mymessenger.Adapters.HomeRecAdapter
 import com.example.mymessenger.Models.UserModel
-import com.google.android.gms.tasks.OnCompleteListener
+import com.example.mymessenger.template.Animator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -38,9 +37,11 @@ class HomeFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var firebaseUser: FirebaseUser
     private lateinit var recAdapter: HomeRecAdapter
-    private lateinit var pd: ProgressDialog
-    private lateinit var pb: ProgressBar
-    var s: String = "a"
+    private lateinit var loader: LottieAnimationView
+    private lateinit var animator: Animator
+    private lateinit var fadeIn: Animation
+    private lateinit var fadeOut: Animation
+    private lateinit var s: String
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -70,28 +71,33 @@ class HomeFragment : Fragment() {
         database = FirebaseDatabase.getInstance()
         mAuth = FirebaseAuth.getInstance()
         firebaseUser = mAuth.currentUser!!
-        pb = view.findViewById(R.id.HFrag_pBar)
-        pb.visibility = 1;
+        loader = view.findViewById(R.id.anim_preload2)
+        fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+        animator = Animator(loader)
+        animator.setPrimAnim(fadeIn, fadeOut)
+        animator.loadPrimAnimation(View.VISIBLE)
         recyclerView = view.findViewById(R.id.home_rec)
         recyclerView.hasFixedSize()
         recyclerView.layoutManager = LinearLayoutManager(context)
+        animator.setRefVIew(recyclerView)
         val list = ArrayList<UserModel>()
         database.getReference("users").child(firebaseUser.uid).child("username").get()
             .addOnCompleteListener {
                 s = it.result.value.toString()
-
+                list.clear()
                 database.getReference("users").addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for (snap in snapshot.children) {
                             val user = snap.getValue(UserModel::class.java)
                             if (user != null) {
                                 if (!user.username.equals(s)) {
-                                    list.add(user!!)
+                                    list.add(user)
                                 }
                             }
                         }
 
-                        pb.visibility = -1;
+                        animator.loadPrimAnimation(View.INVISIBLE)
                         recAdapter.notifyDataSetChanged()
                     }
 
