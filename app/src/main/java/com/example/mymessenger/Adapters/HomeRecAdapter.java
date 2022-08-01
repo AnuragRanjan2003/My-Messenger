@@ -1,12 +1,10 @@
 package com.example.mymessenger.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.mymessenger.ChatActivity;
 import com.example.mymessenger.Models.UserModel;
 import com.example.mymessenger.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -28,7 +23,6 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
     ArrayList<UserModel> arrayList;
     Context context;
     FirebaseDatabase database;
-
 
 
     public HomeRecAdapter(ArrayList<UserModel> arrayList, Context context) {
@@ -49,7 +43,7 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
         holder.name.setText(user.getUsername());
         holder.place.setText(user.getPlace());
         holder.job.setText(user.getJob());
-        if(!user.getUrl().equals(""))
+        if (!user.getUrl().equals(null))
             Glide.with(holder.itemView.getContext()).load(user.getUrl()).into(holder.Image);
         else
             Glide.with(holder.itemView.getContext()).load(R.drawable.man).into(holder.Image);
@@ -61,28 +55,26 @@ public class HomeRecAdapter extends RecyclerView.Adapter<HomeRecAdapter.viewHold
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        TextView name,place,job;
+        TextView name, place, job;
         ImageView Image;
-
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.home_rec_name);
             Image = itemView.findViewById(R.id.home_rec_img);
-            place=itemView.findViewById(R.id.home_rec_place);
-            job=itemView.findViewById(R.id.home_rec_job);
+            place = itemView.findViewById(R.id.home_rec_place);
+            job = itemView.findViewById(R.id.home_rec_job);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context, ChatActivity.class);
-                    intent.putExtra("recName",name.getText().toString());
+                    Intent intent = new Intent(context, ChatActivity.class);
+                    intent.putExtra("recName", name.getText().toString());
                     context.startActivity(intent);
                 }
             });
 
         }
     }
-
 
 
 }

@@ -6,4 +6,5 @@
     <string name="PleaseWait">Please Wait</string>
     <string name="noData">Unable to load data</string>
     <string name="setting">Setting</string>
+    <string name="name">name</string>
 </resources>

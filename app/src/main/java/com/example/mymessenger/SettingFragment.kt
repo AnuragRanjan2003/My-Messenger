@@ -10,7 +10,10 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.webkit.MimeTypeMap
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
@@ -38,14 +41,14 @@ class SettingFragment : Fragment() {
     private lateinit var img: ImageView
     private lateinit var fUser: FirebaseUser
     private lateinit var storage: FirebaseStorage
-    private lateinit var loader:LottieAnimationView
+    private lateinit var loader: LottieAnimationView
     private lateinit var u: UserModel
     private lateinit var name: TextView
     private lateinit var place: TextView
     private lateinit var job: TextView
     private lateinit var animator: Animator
-    private lateinit var fadeIn:Animation
-    private lateinit var fadeOut:Animation
+    private lateinit var fadeIn: Animation
+    private lateinit var fadeOut: Animation
     private val visible = 1
     private val invisible = -1
 
@@ -78,15 +81,15 @@ class SettingFragment : Fragment() {
             val intent = Intent(context, AskActivity::class.java)
             startActivity(intent)
         }
-        fadeIn=AnimationUtils.loadAnimation(context,R.anim.fade_in)
-        fadeOut=AnimationUtils.loadAnimation(context,R.anim.fade_out)
+        fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
         name = view.findViewById(R.id.set_Name)
         place = view.findViewById(R.id.set_place)
         job = view.findViewById(R.id.set_job)
 
-        loader=view.findViewById(R.id.anim_preload)
-        animator= Animator(loader)
-        animator.setPrimAnim(fadeIn,fadeOut)
+        loader = view.findViewById(R.id.anim_preload)
+        animator = Animator(loader)
+        animator.setPrimAnim(fadeIn, fadeOut)
         img = view.findViewById(R.id.set_pImg)
         animator.setRefVIew(img)
         setVis(invisible)
@@ -127,14 +130,15 @@ class SettingFragment : Fragment() {
                 storage.getReference("profileImages/" + fUser.uid + "." + getFileExtension(ur!!))
             sRef.putFile(ur).addOnSuccessListener {
                 Toast.makeText(context, "Changed successfully", Toast.LENGTH_LONG).show()
-                if (u.url.contains(getFileExtension(ur)!!))
-                    storage.getReferenceFromUrl(u.url).delete()
                 sRef.downloadUrl.addOnSuccessListener {
                     dRef.setValue(it.toString()).addOnCompleteListener {
                         animator.loadPrimAnimation(View.INVISIBLE)
                         setVis(visible)
                     }.addOnSuccessListener {
-                        Glide.with(view!!.context).load(dRef.get().result.value).into(img)
+                        dRef.get().addOnCompleteListener { it1 ->
+                            Glide.with(view!!.context).load(it1.result.value).into(img)
+                        }
+
                     }
                 }
                     .addOnFailureListener {
@@ -184,7 +188,6 @@ class SettingFragment : Fragment() {
         place.visibility = x
         img.visibility = x
     }
-
 
 
 }
