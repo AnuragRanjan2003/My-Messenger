@@ -11,9 +11,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/lightBlack"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:background="@color/lightBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,13 +23,13 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"
-            app:strokeColor="@color/white"
-            app:strokeWidth="2dp"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/round" />
+            app:shapeAppearance="@style/round"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
 
         <TextView
             android:id="@+id/post_p_name"
@@ -73,18 +73,18 @@
         android:minHeight="300dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toTopOf="@+id/post_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/post_text"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
         android:id="@+id/post_text"
         android:layout_width="match_parent"
-        android:padding="5dp"
-        android:background="@color/lightBlack"
         android:layout_height="wrap_content"
+        android:background="@color/lightBlack"
+        android:padding="5dp"
         android:text="text"
         android:textColor="@color/white"
         android:textSize="22sp"
@@ -92,4 +92,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

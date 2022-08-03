@@ -25,6 +25,7 @@
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_main2.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_next_step.xml" value="0.25677083333333334" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_post.xml" value="0.264" />
+        <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_post_display.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_sign_in.xml" value="0.2528205128205128" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_sign_up.xml" value="0.2528205128205128" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/activity_sign_up2.xml" value="0.25677083333333334" />
@@ -38,7 +39,7 @@
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/fragment_setting.xml" value="0.25677083333333334" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/home_rec_vm.xml" value="0.2557291666666667" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/my_chat_vm.xml" value="0.25677083333333334" />
-        <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/post_vm_layout.xml" value="0.21077383497221033" />
+        <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/post_vm_layout.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/prg_bar.xml" value="0.21077383497221033" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/layout/signup_progress_btn.xml" value="0.21077383497221033" />
         <entry key="..\:/AndroidProjects/MyMessenger/app/src/main/res/menu/nav_menu.xml" value="0.20982905982905983" />

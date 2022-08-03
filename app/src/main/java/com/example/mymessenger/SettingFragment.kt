@@ -10,18 +10,22 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.webkit.MimeTypeMap
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.example.mymessenger.Adapters.PostRecAdapter
+import com.example.mymessenger.Models.PostModel
 import com.example.mymessenger.Models.UserModel
 import com.example.mymessenger.template.Animator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +53,10 @@ class SettingFragment : Fragment() {
     private lateinit var animator: Animator
     private lateinit var fadeIn: Animation
     private lateinit var fadeOut: Animation
+    private lateinit var rec: RecyclerView
+    private lateinit var pBar: ProgressBar
+    private lateinit var recAdapter: PostRecAdapter
+    private lateinit var list: ArrayList<PostModel>
     private val visible = 1
     private val invisible = -1
 
@@ -72,9 +80,11 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val dRef = FirebaseDatabase.getInstance().getReference("users")
+        val dRef2 = FirebaseDatabase.getInstance().getReference("posts")
         val mAuth = FirebaseAuth.getInstance()
         storage = FirebaseStorage.getInstance()
         fUser = mAuth.currentUser!!
+        list = ArrayList<PostModel>()
         val logOut = view.findViewById<Button>(R.id.btn_logOut)
         logOut.setOnClickListener {
             mAuth.signOut()
@@ -86,7 +96,8 @@ class SettingFragment : Fragment() {
         name = view.findViewById(R.id.set_Name)
         place = view.findViewById(R.id.set_place)
         job = view.findViewById(R.id.set_job)
-
+        rec = view.findViewById(R.id.set_my_rec)
+        pBar = view.findViewById(R.id.set_my_p_bar)
         loader = view.findViewById(R.id.anim_preload)
         animator = Animator(loader)
         animator.setPrimAnim(fadeIn, fadeOut)
@@ -114,6 +125,26 @@ class SettingFragment : Fragment() {
             intent.type = "image/*"
             startActivityForResult(intent, 1)
         }
+        rec.layoutManager = LinearLayoutManager(context)
+        rec.hasFixedSize()
+        dRef2.addValueEventListener(object : ValueEventListener {
+            lateinit var pM: PostModel
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (snap in snapshot.children) {
+                    pM = snap.getValue(PostModel::class.java)!!
+                    if (pM.senderUid.equals(fUser.uid)) { list.add(pM) }
+                }
+                pBar.visibility=View.GONE
+                recAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+        recAdapter=PostRecAdapter(list,context)
+        rec.adapter=recAdapter
 
 
     }

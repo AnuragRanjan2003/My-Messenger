@@ -5,11 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="110dp">
 
 
         <TextView
@@ -79,7 +84,7 @@
             android:layout_marginTop="20dp"
             android:text="log out"
             android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,14 +93,47 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/anim_preload"
             android:layout_width="200dp"
-            android:scaleType="fitXY"
             android:layout_height="200dp"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:lottie_rawRes="@raw/preloader"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/preloader" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="My Posts"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/set_my_rec"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/set_my_rec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="" />
+
+        <ProgressBar
+            android:id="@+id/set_my_p_bar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminateTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/set_my_rec"
+            app:layout_constraintEnd_toEndOf="@id/set_my_rec"
+            app:layout_constraintStart_toStartOf="@+id/set_my_rec"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="@+id/set_my_rec" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </FrameLayout>

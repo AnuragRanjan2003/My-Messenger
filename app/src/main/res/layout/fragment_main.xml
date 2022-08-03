@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment"
     android:layout_marginTop="30dp"
-    android:layout_marginBottom="30dp">
+    android:layout_marginBottom="60dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:id="@+id/main_rec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

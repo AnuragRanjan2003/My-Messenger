@@ -1,6 +1,7 @@
 package com.example.mymessenger.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mymessenger.Models.PostModel;
+import com.example.mymessenger.PostDisplay;
 import com.example.mymessenger.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -42,6 +44,22 @@ public class PostRecAdapter extends RecyclerView.Adapter<PostRecAdapter.ViewHold
         holder.Text.setText(pM.getText());
         Glide.with(holder.itemView.getContext()).load(pM.getUrl()).into(holder.PostImg);
         Glide.with(holder.itemView.getContext()).load(pM.getProfileUrl()).into(holder.pImg);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, PostDisplay.class);
+                ArrayList<String> list=new ArrayList<>();
+                list.add(pM.getSenderName());//0
+                list.add(pM.getPlace());//1
+                list.add(pM.getJob());//2
+                list.add(pM.getText());//3
+                list.add(pM.getProfileUrl());//4
+                list.add(pM.getUrl());//5
+                list.add(pM.getSenderUid());//6
+                intent.putExtra("post",list);//7
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
